@@ -1,0 +1,1 @@
+Welcome, <user1> and <user2>!

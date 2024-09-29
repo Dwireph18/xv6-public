@@ -1,1 +1,1 @@
-Good morning, USER! Welcome to PLACE. It's a nice DAY today.
+The best long variable is LONG_VARIABLE_NAME.

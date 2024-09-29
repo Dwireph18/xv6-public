@@ -1,1 +1,1 @@
-Good morning, USER!
+Special characters like $, %, & are tricky for USER.

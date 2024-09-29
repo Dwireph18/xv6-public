@@ -1,0 +1,1 @@
+VAR1 and VAR2 are variables.

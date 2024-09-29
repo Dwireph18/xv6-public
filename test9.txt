@@ -1,0 +1,1 @@
+USER is traveling to PLACE on DATE.

@@ -1,0 +1,30 @@
+name: Build and Test XV6
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout the code
+      uses: actions/checkout@v2
+
+    - name: Install Dependencies
+      run: |
+        sudo apt update
+        sudo apt install -y qemu-system-i386 build-essential git
+
+    - name: Build XV6
+      run: |
+        make clean
+        make
+
+    - name: Run XV6 in QEMU
+      run: make qemu

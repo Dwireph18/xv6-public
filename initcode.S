@@ -1,4 +1,3 @@
-nano preprocess.c
 # Initial process execs /init.
 # This code runs in user space.
 

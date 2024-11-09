@@ -51,7 +51,7 @@ TOOLPREFIX := $(shell if i386-jos-elf-objdump -i 2>&1 | grep '^elf32-i386$$' >/d
 endif
 
 # If the makefile can't find QEMU, specify its path here
-QEMU = /mingw64/bin/qemu-system-i386.exe
+QEMU = qemu-system-i386
 
 
 # Try to infer the correct QEMU
@@ -183,6 +183,10 @@ UPROGS=\
 	_wc\
 	_zombie\
         _hello\
+        _ps\
+        _dpro\
+        _nice\
+
 
 fs.img: mkfs README $(UPROGS)
 	./mkfs fs.img README $(UPROGS)
@@ -224,7 +228,7 @@ endif
 QEMUOPTS = -drive file=fs.img,index=1,media=disk,format=raw -drive file=xv6.img,index=0,media=disk,format=raw -smp $(CPUS) -m 512 $(QEMUEXTRA)
 
 qemu: fs.img xv6.img
-	$(QEMU) -serial mon:stdio $(QEMUOPTS)
+        $(QEMU) -nographic -serial mon:stdio $(QEMUOPTS)
 
 qemu-memfs: xv6memfs.img
 	$(QEMU) -drive file=xv6memfs.img,index=0,media=disk,format=raw -smp $(CPUS) -m 256
@@ -249,12 +253,14 @@ qemu-nox-gdb: fs.img xv6.img .gdbinit
 # rename it to rev0 or rev1 or so on and then
 # check in that version.
 
-EXTRA=\
-	mkfs.c ulib.c user.h cat.c echo.c forktest.c grep.c kill.c\
-	ln.c ls.c mkdir.c rm.c stressfs.c usertests.c wc.c zombie.c\
-	printf.c umalloc.c\
-	README dot-bochsrc *.pl toc.* runoff runoff1 runoff.list\
-	.gdbinit.tmpl gdbutil\
+EXTRA = \
+        mkfs.c ulib.c user.h cat.c echo.c forktest.c grep.c kill.c\
+        ln.c ls.c mkdir.c rm.c stressfs.c usertests.c wc.c zombie.c\
+        printf.c umalloc.c\
+        nice.c dpro.c ps.c\
+        README dot-bochsrc *.pl toc.* runoff runoff1 runoff.list\
+        .gdbinit.tmpl gdbutil\
+
 
 dist:
 	rm -rf dist
